@@ -1,0 +1,27 @@
+Найти топ 7 директорий на сервере, которые больше всего занимают память и записать их в файл.
+
+
+root@devops:/home/oleg/devops# du -a / | grep -v "cannot access"|sort -n -r | head -n 7 > hw1.q1.txt
+
+du: cannot access '/run/user/1000/doc': Permission denied
+du: cannot access '/run/user/1000/gvfs': Permission denied
+du: cannot access '/proc/2825/task/2825/fd/4': No such file or directory
+du: cannot access '/proc/2825/task/2825/fdinfo/4': No such file or directory
+du: cannot access '/proc/2825/fd/3': No such file or directory
+du: cannot access '/proc/2825/fdinfo/3': No such file or directory
+root@devops:/home/oleg/devops# 
+root@devops:/home/oleg/devops# 
+
+root@devops:/home/oleg/devops# cat ./hw1.q1.txt 
+13720110	/
+4327052	/usr
+4008964	/swap.img
+3296173	/snap
+2572748	/usr/lib
+1765892	/var
+1446928	/var/lib
+
+root@devops:/home/oleg/devops# 
+
+
+

@@ -1,0 +1,42 @@
+Изучить, что такое zombie процесс (спрашивают на собесах).
+
+https://en.wikipedia.org/wiki/Zombie_process
+
+https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%86%D0%B5%D1%81%D1%81-%D0%B7%D0%BE%D0%BC%D0%B1%D0%B8
+
+
+
+Скрипт для создания зомби процесса
+
+#!/usr/bin/env python3
+# -*- coding: utf8 -*-
+
+import subprocess
+import time
+import threading
+
+# Порождаем процесс 'ls' с параметром '-l'
+proc = subprocess.Popen(['ls','-l'])
+
+# Останавливаем главный поток программы на 5 секунд. На их протяжении процесс будет иметь
+# статус "зомби", хоть процесс уже и завершился, поскольку не была выполнена обработка
+# результата процесса
+time.sleep(5)
+
+# В этом месте зомби исчезнет, т.к. программа очистит буферы ввода-вывода для процесса
+# и считает код его завершения
+proc.communicate()
+
+time.sleep(5)
+
+
+результат
+
+root@devops:~# ps aux|grep Z
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root        3304  0.2  0.0      0     0 pts/1    Z+   09:37   0:00 [ls] <defunct>
+root        3310 50.0  0.0  17812  2304 pts/3    S+   09:37   0:00 grep --color=auto Z
+
+
+
+

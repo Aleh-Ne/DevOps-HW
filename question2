@@ -1,0 +1,38 @@
+Создать пользователя и добавить его в группу sudo.
+
+root@devops:/home/oleg/devops# adduser testuser
+info: Adding user `testuser' ...
+info: Selecting UID/GID from range 1000 to 59999 ...
+info: Adding new group `testuser' (1002) ...
+info: Adding new user `testuser' (1002) with group `testuser (1002)' ...
+warn: The home directory `/home/testuser' already exists.  Not touching this directory.
+New password: 
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password: 
+passwd: password updated successfully
+Changing the user information for testuser
+Enter the new value, or press ENTER for the default
+	Full Name []: 
+	Room Number []: 
+	Work Phone []: 
+	Home Phone []: 
+	Other []: 
+Is the information correct? [Y/n] Y
+info: Adding new user `testuser' to supplemental / extra groups `users' ...
+info: Adding user `testuser' to group `users' ...
+root@devops:/home/oleg/devops# 
+
+
+
+root@devops:/home/oleg/devops# groupmems -g sudo -l
+oleg 
+
+
+root@devops:/home/oleg/devops# usermod -aG sudo testuser
+
+
+root@devops:/home/oleg/devops# groupmems -g sudo -l
+oleg  testuser 
+
+
+
